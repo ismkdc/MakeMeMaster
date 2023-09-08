@@ -1,0 +1,19 @@
+version: '3.9'
+services:  
+    postgres:
+        image: postgres:15-alpine
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: passwd
+            POSTGRES_USER: usr
+            POSTGRES_DB: db
+        ports: 
+            - 127.0.0.1:5432:5432
+
+    adminer:
+        image: adminer
+        restart: always
+        ports: 
+            - 127.0.0.1:8282:8080
+        depends_on: 
+            - postgres

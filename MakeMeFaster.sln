@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakeMeFaster", "MakeMeFaster\MakeMeFaster.csproj", "{65A25F08-6D6B-47B3-8649-6AD9F3AB14E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakeMeFaster.DataAPI", "MakeMeFaster.DataAPI\MakeMeFaster.DataAPI.csproj", "{0BA74E7A-0D4F-4A13-BA32-F1D894DA435A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeDataGenerator", "FakeDataGenerator\FakeDataGenerator.csproj", "{09599B22-D5B4-43AC-819F-48D22870254B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65A25F08-6D6B-47B3-8649-6AD9F3AB14E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65A25F08-6D6B-47B3-8649-6AD9F3AB14E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65A25F08-6D6B-47B3-8649-6AD9F3AB14E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65A25F08-6D6B-47B3-8649-6AD9F3AB14E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BA74E7A-0D4F-4A13-BA32-F1D894DA435A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BA74E7A-0D4F-4A13-BA32-F1D894DA435A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BA74E7A-0D4F-4A13-BA32-F1D894DA435A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BA74E7A-0D4F-4A13-BA32-F1D894DA435A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09599B22-D5B4-43AC-819F-48D22870254B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09599B22-D5B4-43AC-819F-48D22870254B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09599B22-D5B4-43AC-819F-48D22870254B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09599B22-D5B4-43AC-819F-48D22870254B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
