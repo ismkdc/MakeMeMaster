@@ -1,25 +1,52 @@
+using System.Net;
+using System.Text.Json;
+using MakeMeFaster;
+using MakeMeFaster.Data;
+using Microsoft.AspNetCore.Http.Json;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.Configure<JsonOptions>(options =>
+    options.SerializerOptions.TypeInfoResolver = MakeMeFasterJsonSerializerContext.Default
+);
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient("MakeMeFaster");
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+var jsonSerializerOptions = new JsonSerializerOptions
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    PropertyNameCaseInsensitive = true,
+    TypeInfoResolver = MakeMeFasterJsonSerializerContext.Default
+};
 
-app.UseHttpsRedirection();
+app.MapGet("/products", (IHttpClientFactory httpClientFactory) =>
+    {
+        var httpClient = httpClientFactory.CreateClient("MakeMeFaster");
+        return Handle();
 
-app.UseAuthorization();
+        async IAsyncEnumerable<ProductResponse> Handle()
+        {
+            var productsResponse =
+                await httpClient.GetAsync("http://localhost:5096/products", HttpCompletionOption.ResponseHeadersRead);
+            var productsStream = await productsResponse.Content.ReadAsStreamAsync();
 
-app.MapControllers();
+            await foreach (var product in JsonSerializer.DeserializeAsyncEnumerable<Product>(productsStream,
+                               jsonSerializerOptions))
+            {
+                var category =
+                    await httpClient.GetFromJsonAsync<Category>(
+                        $"http://localhost:5096/categories/{product.CategoryId}",
+                        jsonSerializerOptions);
+
+                yield return new ProductResponse
+                {
+                    Product = product,
+                    Category = category
+                };
+            }
+        }
+    }
+);
 
 app.Run();
